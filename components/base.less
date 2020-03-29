@@ -1,0 +1,91 @@
+@import (css) url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,Nunito,Poppins:400,500,600,700,800");
+
+.d-flex{ display: flex }
+.flex-row{ .d-flex; flex-direction: row; }
+.flex-column{ .d-flex; flex-direction: column; }
+
+.justify-between{ justify-content: space-between; }
+.justify-around{ justify-content: space-around; }
+.justify-start{ justify-content: flex-start; }
+.justify-end{ justify-content: flex-end; }
+.justify-center{ justify-content: center; }
+.justify-evenly{ justify-content: space-evenly }
+.justify-stretch{ justify-content: stretch }
+
+.align-start{ align-items: flex-start; }
+.align-end{ align-items: flex-end; }
+.align-center{ align-items: center; }
+.align-stretch{ align-items: stretch; }
+.align-baseline{ align-items: baseline; }
+
+.flex-grow{ flex-grow: 1; }
+.flex-grow-0{ flex-grow: 0; }
+
+.position-relative{ position: relative; }
+
+.centered{
+  .flex-column;
+  .justify-center;
+  .align-center;
+}
+
+/**
+ * Global Reset of all HTML Elements
+ *
+ * Resetting all of our HTML Elements ensures a smoother
+ * visual transition between browsers. If you don't believe me,
+ * try temporarily commenting out this block of code, then go
+ * and look at Mozilla versus Safari, both good browsers with
+ * a good implementation of CSS. The thing is, all browser CSS
+ * defaults are different and at the end of the day if visual
+ * consistency is what we're shooting for, then we need to
+ * make sure we're resetting all spacing elements.
+ *
+ */
+html, body {
+  border: 0;
+  font-family: "Helvetica-Neue", "Helvetica", Arial, sans-serif;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+div, span, object, iframe, img, table, caption, thead, tbody,
+tfoot, tr, tr, td, article, aside, canvas, details, figure, hgroup, menu,
+nav, footer, header, section, summary, mark, audio, video {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, address, cit, code,
+del, dfn, em, ins, q, samp, small, strong, sub, sup, b, i, hr, dl, dt, dd,
+ol, ul, li, fieldset, legend, label {
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+}
+
+article, aside, canvas, figure, figure img, figcaption, hgroup,
+footer, header, nav, section, audio, video {
+  display: block;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  caption, th, td {
+    text-align: left;
+    vertical-align: middle;
+  }
+}
+
+a img {
+  border: 0;
+}
+
+:focus {
+  outline: 0;
+}
