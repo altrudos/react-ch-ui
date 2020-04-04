@@ -18,7 +18,9 @@ export default class CustomDocument extends Document {
           </link>
         </Head>
         <body>
-        <Main />
+        <div id={"container"}>
+            <Main />
+        </div>
         <NextScript />
         </body>
       </Html>

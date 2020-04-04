@@ -56,7 +56,7 @@ export default function CharitiesView() {
         <ul>
           {
             charities.map( ch => (
-              <li>{ ch.Name }</li>
+              <li key={ch.Id}>{ ch.Name }</li>
             ))
           }
         </ul>

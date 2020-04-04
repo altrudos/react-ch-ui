@@ -1,4 +1,5 @@
 const routes = require('next-routes')
 
 module.exports = routes().
-	add("", "/", "index")
+	add("", "/", "index").
+	add("drive", "/:uri", "drive")

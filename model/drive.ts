@@ -1,10 +1,15 @@
+export type Source = {
+
+}
+
 
 export type Drive = {
   Id: string
-  Amount: number,
   Created: string | Date,
-  Source?: string,
+  Source?: Source,
   SourceUrl: string,
+  SourceMeta?: object,
+  SourceType: string,
   Uri: string,
 
   RedditCommentId?: number
@@ -19,4 +24,11 @@ export type Drive = {
   FinalAmountMax: number,
   DonorAmountTotal: number,
   DonorAmountMax: number,
+}
+
+export type NewDrive = {
+  Amount: string,
+  SourceUrl: string,
+  CharityId: string,
+  Currency: string
 }

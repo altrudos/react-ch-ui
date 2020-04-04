@@ -1,10 +1,10 @@
 import React from 'react'
-import CharitiesView from "../modules/charities/view-charities"
+import NewDriveForm from "modules/drives/new-drive-form";
 
 export default function HomePage() {
   return (
     <div className="fullscreen">
-      <CharitiesView/>
+        <NewDriveForm/>
     </div>
   )
 }
