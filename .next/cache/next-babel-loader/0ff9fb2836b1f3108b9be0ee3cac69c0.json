@@ -1,1 +1,0 @@
-{"ast":null,"code":"export default function CharitiesView() {}","map":{"version":3,"sources":["/Users/bryancua/Sites/charityhonor/modules/charities/view-charities.tsx"],"names":["CharitiesView"],"mappings":"AAEA,eAAe,SAASA,aAAT,GAAyB,CAEvC","sourcesContent":["import React from 'react'\n\nexport default function CharitiesView() {\n\n}"]},"metadata":{},"sourceType":"module"}
