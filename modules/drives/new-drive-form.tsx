@@ -1,7 +1,10 @@
 import React, {useState} from "react"
 import DonationFields from "modules/donations/donation-fields";
 import Input from "../../components/form/input"
+import StatusButton from "../../components/button/status-button"
+import Errors from "../../components/errors/errors"
 import {NewDrive} from "model/drive";
+import {AsyncState} from "../../components/async"
 
 const validCurrencies = ['USD', 'CAD', 'EUR']
 
@@ -56,18 +59,8 @@ export default function NewDriveForm () {
         alert(d)
     }
 
-    const renderErrors = () => {
-        if (errors.length == 0) {
-            return ""
-        }
-
-        return <ul className={"errors"}>
-            {errors.map((err, i) => <li key={i}>{err}</li>)}
-        </ul>
-    }
-
     return <form onSubmit={submit}>
-        {renderErrors()}
+        <Errors errors={errors}></Errors>
         <Input name={"sourceUrl"} value={sourceUrl} setValue={setSourceUrl} label={"Content URL"} />
         <DonationFields
             currency={currency}
@@ -77,7 +70,7 @@ export default function NewDriveForm () {
             charity={charityId}
             setCharity={setCharity} />
         <div className={"form-group"}>
-            <button type={"submit"}>Submit</button>
+            <StatusButton status={AsyncState.Available}>Submit</StatusButton>
         </div>
     </form>
 
