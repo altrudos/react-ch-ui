@@ -3,8 +3,10 @@ import DonationFields from "modules/donations/donation-fields";
 import Input from "../../components/form/input"
 import StatusButton from "../../components/button/status-button"
 import Errors from "../../components/errors/errors"
-import {NewDrive} from "model/drive";
+import {NewDrive, Drive} from "model/drive";
 import {AsyncState} from "../../components/async"
+import DriveApi from "api/drives"
+import {parseError} from "util/error";
 
 const validCurrencies = ['USD', 'CAD', 'EUR']
 
@@ -12,10 +14,12 @@ export default function NewDriveForm () {
     const [charityId, setCharity] = useState<string>("")
     const [amount, setAmount] = useState<string>("10")
     const [currency, setCurrency] = useState<string>("USD")
-    const [sourceUrl, setSourceUrl] = useState<string>("")
+    const [sourceUrl, setSourceUrl] = useState<string>("https://www.reddit.com/r/Coronavirus/comments/fv7xk0/over_the_past_24_hours_the_us_reported_33557_new/")
     const [errors, setErrors] = useState<string[]>([])
+    const [drive, setDrive] = useState<Drive>(null)
+    const [donateLink, setDonateLink] = useState<string>("")
 
-    const submit = (e) => {
+    const submit = async (e) => {
         e.preventDefault()
         const errors : string [] = []
         const amt = parseFloat(amount)
@@ -56,7 +60,22 @@ export default function NewDriveForm () {
             Currency: currency,
 
         }
-        alert(d)
+        try {
+            const resp = await DriveApi.create(d)
+            setDrive(resp.Drive)
+            setDonateLink(resp.DonateLink)
+        } catch (ex) {
+            const err = parseError(ex)
+            setErrors([err])
+        }
+    }
+
+    if (drive != null) {
+        return <div>
+            Created drive {drive.Uri} {drive.SourceType}/{drive.SourceKey}
+            <br /><small>{drive.SourceUrl}</small>
+            <br />Donate: <a href={donateLink}>{donateLink}</a>
+        </div>
     }
 
     return <form onSubmit={submit}>
