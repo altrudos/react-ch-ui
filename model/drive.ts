@@ -10,12 +10,8 @@ export type Drive = {
   SourceUrl: string,
   SourceMeta?: object,
   SourceType: string,
+  SourceKey: string,
   Uri: string,
-
-  RedditCommentId?: number
-  RedditUsername: string
-  RedditSubreddit: string
-  RedditMarkdown: string
 
   MostRecentDonorAmount: number,
   MostRecentFinalAmount: number,

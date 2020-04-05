@@ -1,5 +1,10 @@
 import Api, {Paged} from "./api"
-import {Drive} from "../model/drive"
+import {Drive, NewDrive} from "../model/drive"
+
+export type NewDriveResponse = {
+    Drive: Drive,
+    DonateLink: string
+}
 
 const DriveApi = {
     async all () : Promise<Paged<Drive>> {
@@ -16,5 +21,9 @@ const DriveApi = {
         const resp = await Api.get<DriveResponse>("/drive/" + id)
         return resp.data.Drive
     },
+    async create(d : NewDrive) : Promise<NewDriveResponse> {
+        const resp = await Api.post<NewDriveResponse>("/drive", d)
+        return resp.data
+    }
 }
 export default DriveApi
