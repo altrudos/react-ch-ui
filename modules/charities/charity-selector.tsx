@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
-import cx from "../../util/cx"
 import {AsyncState} from "components/async"
 import {Charity} from "model/charity";
 import CharityApi from "api/charities";
+import Select from "components/form/select"
 
 export type CharitySelectorProps = {
     className?: string
@@ -62,18 +62,5 @@ export default function CharitySelector(
         })
     }
 
-    return (
-        <div className={cx("form-group", className, {inline})}>
-            {!!label && (
-                <label htmlFor={name}>{label}</label>
-            )}
-            <div className="form-input">
-                <select
-                    value={value}
-                    onChange={ e => setValue(e.target.value) }>
-                    {options.map(o => <option value={o.value} key={o.value}>{o.label}</option>)}
-                </select>
-            </div>
-        </div>
-    )
+    return <Select name={name} setValue={setValue} value={value} options={options} />
 }
