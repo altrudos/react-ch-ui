@@ -14,7 +14,7 @@ export default function NewDriveForm () {
     const [charityId, setCharity] = useState<string>("")
     const [amount, setAmount] = useState<string>("10")
     const [currency, setCurrency] = useState<string>("USD")
-    const [sourceUrl, setSourceUrl] = useState<string>("https://www.reddit.com/r/Coronavirus/comments/fv7xk0/over_the_past_24_hours_the_us_reported_33557_new/")
+    const [sourceUrl, setSourceUrl] = useState<string>("")
     const [errors, setErrors] = useState<string[]>([])
     const [drive, setDrive] = useState<Drive>(null)
     const [donateLink, setDonateLink] = useState<string>("")
@@ -71,10 +71,12 @@ export default function NewDriveForm () {
     }
 
     if (drive != null) {
+        window.location.href = donateLink
         return <div>
             Created drive {drive.Uri} {drive.SourceType}/{drive.SourceKey}
             <br /><small>{drive.SourceUrl}</small>
-            <br />Donate: <a href={donateLink}>{donateLink}</a>
+            <br />Redirecting to payment form...
+            <br /><a href={donateLink}>Click here if you aren't taken.</a>
         </div>
     }
 
