@@ -6,6 +6,7 @@ import {Drive} from "model/drive"
 import {Donation} from "model/donation"
 import DrivesList from "modules/drives/drives-list";
 import DonationsList from "modules/donations/donations-list";
+import "./css/index.less"
 
 export type HomePageInfo = {
     TopDrives: Drive[],
@@ -15,10 +16,10 @@ export type HomePageInfo = {
 export default function HomePage ({data}) {
     return (
     <div className="fullscreen">
-        <div className={"new-drive-container"}>
+        <div className={"container new-drive-container"}>
             <NewDriveForm/>
         </div>
-        <div className={"row"}>
+        <div className={"container row"}>
             <div className={"col-md-6 col-sm-12"}>
                 <h6>Weekly Top Drives</h6>
                 <DrivesList drives={data.TopDrives}/>

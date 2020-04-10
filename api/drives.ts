@@ -1,11 +1,18 @@
 import Api, {Paged} from "./api"
 import {Drive, NewDrive, DriveInfo} from "../model/drive"
 import {parseError} from "util/error";
+import {NewDonation} from "model/donation";
 
 export type NewDriveResponse = {
     Drive: Drive,
     DonateLink: string
 }
+
+export type NewDonationResponse = {
+    Drive: Drive,
+    DonateLink: string
+}
+
 
 export enum DriveTopRange {
     Week,
@@ -48,6 +55,10 @@ const DriveApi = {
     },
     async create(d : NewDrive) : Promise<NewDriveResponse> {
         const resp = await Api.post<NewDriveResponse>("/drive", d)
+        return resp.data
+    },
+    async createDonation(driveId : string, donation : NewDonation) : Promise<NewDonationResponse> {
+        const resp = await Api.post<NewDonationResponse>("/drive/"+driveId+"/donate", donation)
         return resp.data
     }
 }

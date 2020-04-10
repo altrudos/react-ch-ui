@@ -2,6 +2,7 @@ import React from "react"
 import {Donation} from "model/donation";
 import Money from "components/money"
 import Link from "next/link"
+import "./donations-list.less"
 
 export type DonationsListProps = {
     donations: Donation[]

@@ -4,8 +4,12 @@ import {Drive, DriveInfo} from "model/drive";
 import {parseError} from "util/error";
 import Errors from "components/errors/errors";
 import DonationsList from "modules/donations/donations-list"
+import DriveDonateForm from "modules/drives/drive-donate-form"
 import SourceEmbed from "modules/sources/source-embed";
 import Link from "next/link"
+import Money from "components/money";
+import "./css/drive.less"
+
 export type DrivePageProps = {
     data : DriveInfo,
     error: any
@@ -25,21 +29,37 @@ export default function DrivePage({
     const drive = data.Drive
     console.log('drive', drive)
     return (
-        <div className="fullscreen">
-            <div>
+        <div className="fullscreen" id={"drive-page"}>
+            <div className={"container back-container"}>
                 <Link href="/">
                     <a>Back home</a>
                 </Link>
             </div>
-            <h1>Drive {drive.Uri}</h1>
-            <SourceEmbed Url={drive.SourceUrl} Type={drive.SourceType} Meta={drive.SourceMeta} Key={drive.SourceKey}/>
-            <div>
-                <h3>Top Donations</h3>
-                <DonationsList donations={data.TopDonations} />
+            <div className={"container header"}>
+                <div className={"inner"}>
+                    <div className={"amount-raised"}><Money amount={drive.FinalAmountTotal} currency={"USD"} /> Raised for</div>
+                    <SourceEmbed Url={drive.SourceUrl} Type={drive.SourceType} Meta={drive.SourceMeta} Key={drive.SourceKey}/>
+                    <div className={"meta"}>{drive.NumDonations || 0} donations since {drive.Created}</div>
+                </div>
             </div>
-            <div>
-                <h3>Recent Donations</h3>
-                <DonationsList donations={data.RecentDonations} />
+            <div className={"donate-form"}>
+                <div className={"container"}>
+                    <DriveDonateForm drive={drive} />
+                </div>
+            </div>
+            <div className={"leaderboards"}>
+                <div className={"container"}>
+                    <div className={"row"}>
+                        <div className={"col-md-6 col-sm-12"}>
+                            <h3>Top Donations</h3>
+                            <DonationsList donations={data.TopDonations} />
+                        </div>
+                        <div className={"col-md-6 col-sm-12"}>
+                            <h3>Recent Donations</h3>
+                            <DonationsList donations={data.RecentDonations} />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
