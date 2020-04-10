@@ -1,7 +1,7 @@
 import Api, {Paged} from "./api"
 import {Drive, NewDrive, DriveInfo} from "../model/drive"
 import {parseError} from "util/error";
-import {NewDonation} from "model/donation";
+import {SubmittedDonation} from "model/donation";
 
 export type NewDriveResponse = {
     Drive: Drive,
@@ -57,8 +57,10 @@ const DriveApi = {
         const resp = await Api.post<NewDriveResponse>("/drive", d)
         return resp.data
     },
-    async createDonation(driveId : string, donation : NewDonation) : Promise<NewDonationResponse> {
-        const resp = await Api.post<NewDonationResponse>("/drive/"+driveId+"/donate", donation)
+    async createDonation(driveId : string, donation : SubmittedDonation) : Promise<NewDonationResponse> {
+        const resp = await Api.post<NewDonationResponse>("/drive/"+driveId+"/donate", {
+            SubmittedDonation: donation
+        })
         return resp.data
     }
 }

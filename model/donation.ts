@@ -10,7 +10,7 @@ export type Donation = {
     Drive?: Drive
 }
 
-export type NewDonation = {
+export type SubmittedDonation = {
     Amount: string,
     Currency: string,
     CharityId: string,
