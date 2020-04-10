@@ -7,5 +7,5 @@ export type Donation = {
     DonorCurrency: string,
     FinalAmount: number,
     FinalCurrency: string,
-    Drive : Drive
+    Drive?: Drive
 }
