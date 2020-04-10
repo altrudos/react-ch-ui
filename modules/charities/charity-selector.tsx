@@ -17,10 +17,7 @@ export type CharitySelectorProps = {
 
 export default function CharitySelector(
     {
-        className,
-        inline,
         name,
-        label,
         value,
         setValue,
     } : CharitySelectorProps
