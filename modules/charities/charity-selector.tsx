@@ -21,6 +21,7 @@ export default function CharitySelector(
         name,
         value,
         setValue,
+        label,
     } : CharitySelectorProps
 ) {
 
@@ -56,5 +57,5 @@ export default function CharitySelector(
         label: 'loading'
     }]
 
-    return <Select name={name} setValue={setValue} value={value} options={options} />
+    return <Select label={label} name={name} setValue={setValue} value={value} options={options} />
 }

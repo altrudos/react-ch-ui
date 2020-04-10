@@ -26,6 +26,7 @@ export type Drive = {
   DonorAmountMax: number,
 
   TopAmount: number,
+  NumDonations: number
 }
 
 export type NewDrive = {
