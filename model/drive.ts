@@ -1,7 +1,11 @@
-export type Source = {
+import {Donation} from "model/donation";
+import {Source} from "model/source";
 
+export type DriveInfo = {
+  Drive : Drive,
+  TopDonations: Donation[],
+  RecentDonations: Donation[],
 }
-
 
 export type Drive = {
   Id: string
