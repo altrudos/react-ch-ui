@@ -1,25 +1,18 @@
 import React, {useEffect, useState} from 'react'
 import NewDriveForm from "modules/drives/new-drive-form";
 import DriveApi, {DriveTopRange} from "api/drives"
+import DonationApi from "api/donations"
 import {Drive} from "model/drive"
 import {Donation} from "model/donation"
-import Link from 'next/link'
+import DrivesList from "modules/drives/drives-list";
+import DonationsList from "modules/donations/donations-list";
 
-export default function HomePage () {
-    const [drives, setDrives] = useState<Drive[]>([])
+export type HomePageInfo = {
+    TopDrives: Drive[],
+    RecentDonations: Donation[]
+}
 
-    useEffect(() => {
-        window['loaded'] = window['loaded'] || 0
-        if (window['loaded'] > 0) {
-            return
-        }
-        window['loaded']++
-        DriveApi.top(DriveTopRange.Week).then((drives) => {
-            console.log('drives.Data')
-            setDrives(drives)
-        })
-    }, [])
-
+export default function HomePage ({data}) {
     return (
     <div className="fullscreen">
         <div className={"new-drive-container"}>
@@ -28,15 +21,39 @@ export default function HomePage () {
         <div className={"row"}>
             <div className={"col-md-6 col-sm-12"}>
                 <h6>Weekly Top Drives</h6>
-                <ul>
-                {drives.map(d => <li key={d.Uri}>
-                    <Link href="/d/[uri]" as={`/d/${d.Uri}`}>
-                        <a>{d.Uri}</a>
-                    </Link>
-                </li>)}
-                </ul>
+                <DrivesList drives={data.TopDrives}/>
+            </div>
+            <div className={"col-md-6 col-sm-12"}>
+                <h6>Recent Donations</h6>
+                <DonationsList donations={data.RecentDonations} showDrive={true}/>
             </div>
         </div>
     </div>
   )
+}
+
+
+export async function getServerSideProps (context) {
+    let data : HomePageInfo = {
+        TopDrives: [],
+        RecentDonations: []
+    }
+
+    try {
+        data.TopDrives = await DriveApi.top(DriveTopRange.Week)
+    } catch (ex) {
+        console.log('ex', ex)
+    }
+
+    try {
+        data.RecentDonations = await DonationApi.recent()
+    } catch (ex) {
+        console.log('ex', ex)
+    }
+
+    return {
+        props: {
+            data,
+        }
+    }
 }
