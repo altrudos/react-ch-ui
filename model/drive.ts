@@ -1,4 +1,4 @@
-import {Donation} from "model/donation";
+import {Donation, SubmittedDonation} from "model/donation";
 import {Source} from "model/source";
 
 export type DriveInfo = {
@@ -30,8 +30,6 @@ export type Drive = {
 }
 
 export type NewDrive = {
-  Amount: string,
   SourceUrl: string,
-  CharityId: string,
-  Currency: string
+  SubmittedDonation: SubmittedDonation
 }

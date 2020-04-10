@@ -4,7 +4,7 @@ import StatusButton from "../../components/button/status-button"
 import Errors from "../../components/errors/errors"
 import {AsyncState} from "../../components/async"
 import getAmount from "util/amount"
-import {NewDonation} from "model/donation";
+import {SubmittedDonation} from "model/donation";
 import {Drive} from "model/drive";
 import DriveApi from "api/drives";
 import {parseError} from "util/error";
@@ -37,7 +37,7 @@ export default function NewDriveForm (
             return
         }
 
-        const dono : NewDonation = {
+        const dono : SubmittedDonation = {
             Amount: amtFixed,
             Currency: curr,
             CharityId: charityId
