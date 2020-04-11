@@ -1,4 +1,4 @@
-export const validCurrencies = ['USD', 'CAD', 'EUR', 'GBP']
+export const validCurrencies = ['USD', 'CAD', 'EUR', 'GBP', 'AUD']
 
 export default function getAmount (amtS : string, currency : string) : [string, string, string[]] {
     const errors = []

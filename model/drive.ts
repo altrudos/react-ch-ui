@@ -18,10 +18,9 @@ export type Drive = {
   Uri: string,
 
   MostRecentDonorAmount: number,
-  MostRecentFinalAmount: number,
+  MostRecentUSDAmount: number,
   MostRecentTime: string | Date,
-  FinalAmountTotal: number,
-  FinalAmountMax: number,
+  USDAmountTotal: number,
   DonorAmountTotal: number,
   DonorAmountMax: number,
 

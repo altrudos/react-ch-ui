@@ -4,8 +4,7 @@ import {Charity} from "model/charity";
 import CharityApi from "api/charities";
 import Select, {SelectProps, SelectOption} from "components/form/select"
 
-const currencies = ["USD", "GBP", "EUR", "HKD", "SGD", "CAD", "AED", "AUD", "ZAR"]
-
+const currencies = ["USD", "GBP", "EUR", "CAD", "AUD"].sort()
 
 export type CurrencySelectProps = {
     className?: string
