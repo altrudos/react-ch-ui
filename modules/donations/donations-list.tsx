@@ -18,9 +18,17 @@ export function DonationListItem (donation : Donation, showDrive : boolean) {
             <a href={"/d/" + drive.Uri}>{drive.SourceType}/{drive.SourceKey} {drive.Uri}</a>
         </Link>
     }
+    let name = <span className={"donor-name anonymous"}>Anon</span>
+    if (donation.DonorName) {
+        name = <span className={"donor-name"}>{donation.DonorName}</span>
+    }
     return <li key={donation.Id}>
-        <div className={"amount"} title={donation.FinalAmount + ' ' + donation.FinalCurrency}><Money amount={donation.DonorAmount} currency={donation.DonorCurrency} /></div>
-        <div className={"date"}><ElapsedTime time={donation.Created} /></div>
+        <div className={"top-link"}>
+            <Money amount={donation.DonorAmount} currency={donation.DonorCurrency}  title={donation.FinalAmount + ' ' + donation.FinalCurrency}/>
+            to
+            <span className={"charity-name"} title={donation.CharityDescription}>{donation.CharityName}</span>
+        </div>
+        <div className={"bottom-lin"}><ElapsedTime time={donation.Created} /> by {name}</div>
         {showDrive && driveLink}
     </li>
 }

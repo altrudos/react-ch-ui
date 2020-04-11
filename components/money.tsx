@@ -3,6 +3,7 @@ import React from "react"
 export type MoneyProps = {
     amount: number,
     currency: string
+    title?: string
 }
 
 const prefixes = {
@@ -21,7 +22,8 @@ const suffixes = {
 
 export default function Money ({
     amount,
-    currency
+    currency,
+    title
 } : MoneyProps) {
     let prefix = ''
     if (prefixes[currency.toLowerCase()]) {
@@ -36,7 +38,7 @@ export default function Money ({
         prefix = '$'
         suffix = ''
     }
-    return <span className={"money " + currency}>
+    return <span className={"money " + currency} title={title}>
         <span className={"amount"}>{prefix}{(amount/100).toFixed(2)}{suffix}</span>
     </span>
 }

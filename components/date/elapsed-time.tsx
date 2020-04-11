@@ -18,7 +18,7 @@ export default function ElapsedTime(
   useEffect(()=>{
     const it = setInterval(()=>{
       setSeconds(elapsedTimeSecs(time))
-    }, 100)
+    }, 1000)
     return ()=>{
       clearInterval(it)
     }
@@ -41,6 +41,8 @@ export function formatSeconds(secs : number ) : string {
   secs = Math.round(secs)
 
   if (secs < 0 ) return ""
+
+  if (secs < 30) return "just now"
 
   const tm = [];
   tm.push( secs % 60 )
