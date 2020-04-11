@@ -9,7 +9,7 @@ export type DriveInfo = {
 
 export type Drive = {
   Id: string
-  Created: string | Date,
+  Created: Date,
   Source?: Source,
   SourceUrl: string,
   SourceMeta?: object,

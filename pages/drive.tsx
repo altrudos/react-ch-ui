@@ -11,6 +11,7 @@ import Money from "components/money";
 import "./css/drive.less"
 import {AsyncState} from "../components/async"
 import useAsync from "../hooks/use-async"
+import ElapsedTime from "components/date/elapsed-time";
 
 export type DrivePageProps = {
   data: DriveInfo,
@@ -65,7 +66,7 @@ export function _DrivePage(
           <div className={"inner"}>
             <div className={"amount-raised"}><Money amount={drive.USDAmountTotal} currency={"USD"}/> Raised for</div>
             <SourceEmbed Url={drive.SourceUrl} Type={drive.SourceType} Meta={drive.SourceMeta} Key={drive.SourceKey}/>
-            <div className={"meta"}>{drive.NumDonations || 0} donations since {drive.Created}</div>
+            <div className={"meta"}>{drive.NumDonations || 0} donations since <ElapsedTime time={drive.Created} /></div>
           </div>
         </div>
         <div className={"donate-form"}>
