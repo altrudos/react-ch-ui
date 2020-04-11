@@ -8,6 +8,7 @@ import {SubmittedDonation} from "model/donation";
 import {Drive} from "model/drive";
 import DriveApi from "api/drives";
 import {parseError} from "util/error";
+import DonationRedirect from "modules/donations/donation-redirect"
 
 
 export default function NewDriveForm (
@@ -19,6 +20,7 @@ export default function NewDriveForm (
 ) {
     const [charityId, setCharity] = useState<string>("")
     const [amount, setAmount] = useState<string>("10")
+    const [name, setName] = useState<string>("")
     const [currency, setCurrency] = useState<string>("USD")
     const [errors, setErrors] = useState<string[]>([])
     const [donateLink, setDonateLink] = useState<string>("")
@@ -40,7 +42,8 @@ export default function NewDriveForm (
         const dono : SubmittedDonation = {
             Amount: amtFixed,
             Currency: curr,
-            CharityId: charityId
+            CharityId: charityId,
+            DonorName: name,
         }
 
         try {
@@ -53,11 +56,7 @@ export default function NewDriveForm (
     }
 
     if (donateLink != "") {
-        window.location.href = donateLink
-        return <div>
-            Redirecting to payment form...
-            <br /><a href={donateLink}>Click here if you aren't taken.</a>
-        </div>
+        return <DonationRedirect url={donateLink} />
     }
 
     return <form onSubmit={submit} className={"donate-form"}>
@@ -67,10 +66,12 @@ export default function NewDriveForm (
             setCurrency={setCurrency}
             amount={amount}
             setAmount={setAmount}
+            name={name}
+            setName={setName}
             charity={charityId}
             setCharity={setCharity} />
         <div className={"form-group"}>
-            <StatusButton status={AsyncState.Available}>Submit</StatusButton>
+            <StatusButton status={AsyncState.Available}>Continue to Payment</StatusButton>
         </div>
     </form>
 
