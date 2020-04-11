@@ -8,10 +8,12 @@ import {AsyncState} from "../../components/async"
 import DriveApi from "api/drives"
 import {parseError} from "util/error";
 import getAmount from "util/amount";
+import DonationRedirect from "modules/donations/donation-redirect"
 
 export default function NewDriveForm () {
     const [charityId, setCharity] = useState<string>("")
     const [amount, setAmount] = useState<string>("10")
+    const [name, setName] = useState<string>("")
     const [currency, setCurrency] = useState<string>("USD")
     const [sourceUrl, setSourceUrl] = useState<string>("")
     const [errors, setErrors] = useState<string[]>([])
@@ -47,6 +49,7 @@ export default function NewDriveForm () {
                 Amount: amtFixed,
                 CharityId: charityId,
                 Currency: curr,
+                DonorName: name,
             },
         }
         try {
@@ -60,19 +63,15 @@ export default function NewDriveForm () {
     }
 
     if (drive != null) {
-        window.location.href = donateLink
-        return <div>
-            Created drive {drive.Uri} {drive.SourceType}/{drive.SourceKey}
-            <br /><small>{drive.SourceUrl}</small>
-            <br />Redirecting to payment form...
-            <br /><a href={donateLink}>Click here if you aren't taken.</a>
-        </div>
+        return <DonationRedirect url={donateLink} />
     }
 
     return <form onSubmit={submit}>
         <Errors errors={errors}></Errors>
         <Input name={"sourceUrl"} value={sourceUrl} setValue={setSourceUrl} label={"Content URL"} />
         <DonationFields
+            name={name}
+            setName={setName}
             currency={currency}
             setCurrency={setCurrency}
             amount={amount}
@@ -80,7 +79,7 @@ export default function NewDriveForm () {
             charity={charityId}
             setCharity={setCharity} />
         <div className={"form-group"}>
-            <StatusButton status={AsyncState.Available}>Submit</StatusButton>
+            <StatusButton status={AsyncState.Available}>Continue to Payment</StatusButton>
         </div>
     </form>
 

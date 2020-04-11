@@ -3,7 +3,11 @@ import {Drive} from "model/drive";
 export type Donation = {
     Id: string
     Created: Date,
+    CharityDescription: string,
+    CharityId: string,
+    CharityName: string,
     DonorAmount: number,
+    DonorName: string,
     DonorCurrency: string,
     FinalAmount: number,
     FinalCurrency: string,
@@ -14,4 +18,5 @@ export type SubmittedDonation = {
     Amount: string,
     Currency: string,
     CharityId: string,
+    DonorName: string
 }

@@ -10,7 +10,9 @@ export default function DonationFields (
         amount,
         setAmount,
         currency,
-        setCurrency
+        setCurrency,
+        name,
+        setName
     }
 ) {
     return (
@@ -18,6 +20,8 @@ export default function DonationFields (
             <CharitySelector value={charity} name={"charity_id"} setValue={setCharity} label={"Charity"}/>
             <Input name="amount" value={amount} setValue={setAmount} label={"Amount"} />
             <CurrencySelect name={"currency"} value={currency} setValue={setCurrency} label={"Currency"} />
+            <Input name="name" value={name} setValue={setName} label={"Your Name"} />
+
         </Fragment>
     )
 }
