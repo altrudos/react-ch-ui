@@ -42,11 +42,12 @@ export default function NewDriveForm () {
             setAmount(amtFixed)
         }
         const d : NewDrive = {
-            Amount: amtFixed,
-            CharityId: charityId,
             SourceUrl: sourceUrl,
-            Currency: curr,
-
+            SubmittedDonation: {
+                Amount: amtFixed,
+                CharityId: charityId,
+                Currency: curr,
+            },
         }
         try {
             const resp = await DriveApi.create(d)

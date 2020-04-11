@@ -7,7 +7,16 @@ export type MoneyProps = {
 
 const prefixes = {
     usd: '$',
-    cad: '$'
+    cad: '$',
+    aud: '$',
+    gbp: '£',
+    eur: '€'
+}
+
+const suffixes = {
+    usd: ' USD',
+    cad: ' CAD',
+    aud: ' AUD'
 }
 
 export default function Money ({
@@ -18,8 +27,16 @@ export default function Money ({
     if (prefixes[currency.toLowerCase()]) {
         prefix = prefixes[currency.toLowerCase()]
     }
+    let suffix = ''
+    if (suffixes[currency.toLowerCase()]) {
+        suffix = suffixes[currency.toLowerCase()]
+    }
+    if (isNaN(amount)) {
+        amount = 0
+        prefix = '$'
+        suffix = ''
+    }
     return <span className={"money " + currency}>
-        <span className={"currency"}>{currency}</span>
-        <span className={"amount"}>{prefix}{(amount/100).toFixed(2)}</span>
+        <span className={"amount"}>{prefix}{(amount/100).toFixed(2)}{suffix}</span>
     </span>
 }
