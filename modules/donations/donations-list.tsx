@@ -3,6 +3,7 @@ import {Donation} from "model/donation";
 import Money from "components/money"
 import Link from "next/link"
 import "./donations-list.less"
+import ElapsedTime from "components/date/elapsed-time";
 
 export type DonationsListProps = {
     donations: Donation[]
@@ -18,8 +19,8 @@ export function DonationListItem (donation : Donation, showDrive : boolean) {
         </Link>
     }
     return <li key={donation.Id}>
-        <div title={donation.FinalAmount + ' ' + donation.FinalCurrency}><Money amount={donation.DonorAmount} currency={donation.DonorCurrency} /></div>
-        <div>{donation.Created}</div>
+        <div className={"amount"} title={donation.FinalAmount + ' ' + donation.FinalCurrency}><Money amount={donation.DonorAmount} currency={donation.DonorCurrency} /></div>
+        <div className={"date"}><ElapsedTime time={donation.Created} /></div>
         {showDrive && driveLink}
     </li>
 }

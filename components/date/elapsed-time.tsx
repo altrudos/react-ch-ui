@@ -12,7 +12,8 @@ export default function ElapsedTime(
   }
 ) {
 
-  const [seconds, setSeconds] = useState<number>(elapsedTimeSecs(time));
+  const date = new Date(time)
+  const [seconds, setSeconds] = useState<number>(elapsedTimeSecs(date));
 
   useEffect(()=>{
     const it = setInterval(()=>{
@@ -23,10 +24,14 @@ export default function ElapsedTime(
     }
   }, [])
 
-  const formatted = (seconds > 0 && seconds < 60 * 60 * 24 * 7)? formatSeconds(seconds) : time.toLocaleDateString()
+  const formatted = (seconds > 0 && seconds < 60 * 24 * 7)? formatSeconds(seconds) : date.toLocaleDateString('en', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  })
 
   return (
-    <span title={ time.toISOString() }>{ formatted }</span>
+    <span title={ date.toISOString() }>{ formatted }</span>
   )
 }
 
@@ -53,13 +58,13 @@ export function formatSeconds(secs : number ) : string {
   const l = tm.length-1
 
   let str = tm[l] + units[l]
-  if( tm[l-1] > 0 ){
+  /*if( tm[l-1] > 0 ){
     str += " " + tm[l-1] + units[l-1]
-  }
+  }*/
   return str + " ago"
 }
 
 export function elapsedTimeSecs(time: Date) : number {
   const n = new Date().getTime()
-  return Math.round(n - time.getTime())/1000
+  return Math.round(n - new Date(time).getTime())/1000
 }
