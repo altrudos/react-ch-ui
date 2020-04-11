@@ -53,7 +53,7 @@ export default function NewDriveForm (
     }
 
     if (donateLink != "") {
-        //window.location.href = donateLink
+        window.location.href = donateLink
         return <div>
             Redirecting to payment form...
             <br /><a href={donateLink}>Click here if you aren't taken.</a>
