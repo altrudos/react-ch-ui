@@ -68,7 +68,7 @@ export default function NewDriveForm () {
 
     return <form onSubmit={submit}>
         <Errors errors={errors}></Errors>
-        <Input name={"sourceUrl"} value={sourceUrl} setValue={setSourceUrl} label={"Content URL"} />
+        <Input name={"sourceUrl"} value={sourceUrl} setValue={setSourceUrl} placeholder={"Paste link"} label={"Content you like"} />
         <DonationFields
             name={name}
             setName={setName}

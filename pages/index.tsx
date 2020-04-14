@@ -6,6 +6,7 @@ import {Drive} from "model/drive"
 import {Donation} from "model/donation"
 import DrivesList from "modules/drives/drives-list";
 import DonationsList from "modules/donations/donations-list";
+import HeroHeader from "components/hero-header"
 import "./css/index.less"
 
 export type HomePageInfo = {
@@ -16,8 +17,13 @@ export type HomePageInfo = {
 export default function HomePage ({data}) {
     return (
     <div className="fullscreen">
-        <div className={"container new-drive-container"}>
-            <NewDriveForm/>
+        <div className={"hero-header-container"}>
+            <HeroHeader />
+        </div>
+        <div className={"new-drive-container"}>
+            <div className={"container"}>
+                <NewDriveForm/>
+            </div>
         </div>
         <div className={"container row"}>
             <div className={"col-md-6 col-sm-12"}>
