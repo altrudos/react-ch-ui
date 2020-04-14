@@ -65,7 +65,7 @@ export function _DrivePage(
         <div className={"container header"}>
           <div className={"inner"}>
             <div className={"amount-raised"}><Money amount={drive.USDAmountTotal} currency={"USD"}/> raised</div>
-            <SourceEmbed Url={drive.SourceUrl} Type={drive.SourceType} Meta={drive.SourceMeta} Key={drive.SourceKey}/>
+            <SourceEmbed source={drive.Source} link={true}/>
             <div className={"meta"}>{drive.NumDonations || 0} donations since <ElapsedTime time={drive.Created} /></div>
           </div>
         </div>

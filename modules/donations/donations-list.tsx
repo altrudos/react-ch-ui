@@ -4,6 +4,7 @@ import Money from "components/money"
 import Link from "next/link"
 import "./donations-list.less"
 import ElapsedTime from "components/date/elapsed-time";
+import SourceEmbed from "modules/sources/source-embed";
 
 export type DonationsListProps = {
     donations: Donation[]
@@ -14,8 +15,17 @@ export function DonationListItem (donation : Donation, showDrive : boolean) {
     let driveLink = null
     if (showDrive) {
         const drive = donation.Drive
+
+        let driveInner = <span>{donation.Drive.Uri}</span>
+
+        if (donation.Drive.Source) {
+            driveInner = <SourceEmbed source={drive.Source} link={false} />
+        }
+
         driveLink = <Link href="/d/[uri]" as={`/d/${drive.Uri}`}>
-            <a href={"/d/" + drive.Uri}>{drive.SourceType}/{drive.SourceKey} {drive.Uri}</a>
+            <a href={"/d/" + drive.Uri}>
+                {driveInner}
+            </a>
         </Link>
     }
     let name = <span className={"donor-name anonymous"}>Anon</span>

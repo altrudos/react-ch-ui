@@ -1,15 +1,15 @@
 import {Source} from "model/source";
+import {SourceEmbedProps} from "modules/sources/source-embed";
 
 export default function DefaultSourceEmbed ({
-    source
-} : { source : Source})
+    source,
+    link
+} : SourceEmbedProps )
 {
-    let inner = source.Url
-    if (inner.length > 50) {
-        inner = inner.substr(0, 48) + '...'
-    }
+    let inner = source.Url.replace(/https?:\/\//i, '')
     return <div className={"reddit reddit-comment"}>
         <div className={"label"}>Whatever is at</div>
-        <a href={source.Url} title={source.Url}>{inner}</a>
+        {link && <a href={source.Url} title={source.Url}>{inner}</a>}
+        {!link && <span>{inner}</span>}
     </div>
 }

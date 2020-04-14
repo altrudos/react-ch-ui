@@ -4,18 +4,23 @@ import RedditComment from "./reddit/reddit-comment"
 import RedditPost from "./reddit/reddit-post"
 import DefaultSource from "./default-source"
 
-export default function SourceEmbed (source : Source) {
-    let inner;
+export type SourceEmbedProps = {
+    source : Source,
+    link?: boolean // If false, don't add hyperlinks to the embed
+}
 
+export default function SourceEmbed (props : SourceEmbedProps) {
+    let inner;
+    const {source} = props
     switch (source.Type) {
         case "reddit_comment":
-            inner = <RedditComment source={source} />
+            inner = <RedditComment {...props} />
             break;
         case "reddit_post":
-            inner = <RedditPost source={source} />
+            inner = <RedditPost {...props} />
             break;
         default:
-            inner = <DefaultSource source={source} />
+            inner = <DefaultSource {...props} />
             break;
     }
 
