@@ -23,9 +23,12 @@ export type Drive = {
   USDAmountTotal: number,
   DonorAmountTotal: number,
   DonorAmountMax: number,
-
-  TopAmount: number,
   NumDonations: number
+
+  // When you get drives for a "Top X" route like "Top Week"
+  // these numbers only reflect donations made during that "top x" window
+  TopAmount: number,
+  TopNumDonations: number,
 }
 
 export type NewDrive = {
