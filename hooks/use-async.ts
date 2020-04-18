@@ -84,7 +84,7 @@ export default function useAsync(
         _setStatus(AsyncState.Success)
         _setStatus(AsyncState.Available, options.AvailableMsg)
       } catch (err) {
-        console.log({...err})
+        console.log('err', err, {...err})
         _setStatus(AsyncState.Error, parseError(err))
         if (options.AvailableAfterError) _setStatus(AsyncState.Available, options.AvailableMsg)
         if (options.ThrowError) throw err
