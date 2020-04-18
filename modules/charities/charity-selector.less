@@ -1,24 +1,33 @@
-.charity-selector-container {
-  ol {
-    list-style: inside;
-    padding: 0px;
-    margin: 0px;
+.charity-selector-option {
+  .charity-name {
+    font-weight: bold;
+    font-size: 12px;
+  }
+  .charity-number {
+    color: #999;
+    font-weight: normal;
+    margin-left: 0px;
+  }
+  .charity-description {
+    color: #666;
+    font-size: 11px;
+  }
+  .charity-country {
+    color: #666;
+    font-size: 11px;
+    font-style: italic;
+  }
 
-    li {
-      list-style-type: none;
-      padding: 3px 6px;
-      margin-bottom: 0;
-      border-bottom: 1px solid #ccc;
-      font-size: 10px;
+  &.has-image {
+    display: flex;
+    flex-direction: row;
 
-      .name {
-        font-weight: bold;
-        font-sizer: 12px;
-      }
-
-      &.selected {
-        background: dodgerblue;
-        color: #fff;
+    .charity-image-container {
+      width: 80px;
+      margin-right: 5px;
+      font-size: 8px;
+      img {
+        width: 80px;
       }
     }
   }

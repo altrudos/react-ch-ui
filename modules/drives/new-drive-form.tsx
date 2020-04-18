@@ -9,9 +9,10 @@ import DriveApi from "api/drives"
 import {parseError} from "util/error";
 import getAmount from "util/amount";
 import DonationRedirect from "modules/donations/donation-redirect"
+import {Charity} from "model/charity";
 
 export default function NewDriveForm () {
-    const [charityId, setCharity] = useState<string>("")
+    const [charity, setCharity] = useState<Charity>(null)
     const [amount, setAmount] = useState<string>("10")
     const [name, setName] = useState<string>("")
     const [currency, setCurrency] = useState<string>("USD")
@@ -47,7 +48,7 @@ export default function NewDriveForm () {
             SourceUrl: sourceUrl,
             SubmittedDonation: {
                 Amount: amtFixed,
-                CharityId: charityId,
+                CharityId: charity.Id,
                 Currency: curr,
                 DonorName: name,
             },
@@ -76,7 +77,7 @@ export default function NewDriveForm () {
             setCurrency={setCurrency}
             amount={amount}
             setAmount={setAmount}
-            charity={charityId}
+            charity={charity}
             setCharity={setCharity} />
         <div className={"form-group"}>
             <StatusButton status={AsyncState.Available}>Continue to Payment</StatusButton>

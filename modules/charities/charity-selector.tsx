@@ -1,10 +1,10 @@
-import React, {useEffect, useState, useRef} from 'react'
-import {AsyncState} from "components/async"
+import React, {Fragment, useRef} from 'react'
 import {Charity} from "model/charity";
 import CharityApi from "api/charities";
-import useAsync from "../../hooks/use-async"
 import cx from "../../util/cx"
+import AsyncSelect, {Option} from 'react-select/async'
 import "./charity-selector.less"
+import { css } from "emotion"
 
 export type CharitySelectorProps = {
     className?: string
@@ -12,133 +12,117 @@ export type CharitySelectorProps = {
 
     name: string
     label?: string | React.Component
-    placeholder?: string
-    value: string
+    value: Charity
     setValue: (string) => void | Promise<void>
+}
+
+function CharityOption (props) {
+    const {
+        getStyles,
+        innerRef,
+        isDisabled,
+        isFocused,
+        isSelected,
+        innerProps,
+        data
+    } = props
+
+    const textInfo = <Fragment>
+        <div className="charity-name">{data.Name} <span className={"charity-number"}>{data.CharityNumber}</span></div>
+        <div className="charity-description">{data.Description}</div>
+        <div className="charity-country">{data.CountryCode}</div>
+    </Fragment>
+
+    let inner
+
+    if (data.LogoUrl) {
+        inner = <Fragment>
+            <div className={"charity-image-container"}>
+                <img src={data.LogoUrl} />
+            </div>
+            <div className={"charity-info-container"}>
+                {textInfo}
+            </div>
+        </Fragment>
+    } else {
+        inner = textInfo
+    }
+
+    return (
+        <div
+            ref={innerRef}
+            className={cx(
+                css(getStyles('option', props)),
+                {
+                    'option': true,
+                    'charity-selector-option': true,
+                    'option--is-disabled': isDisabled,
+                    'option--is-focused': isFocused,
+                    'option--is-selected': isSelected,
+                    'has-image': data.LogoUrl
+                },
+                'global-search-option'
+            )}
+            {...innerProps}
+        >
+            {inner}
+        </div>
+    )
 }
 
 export default function CharitySelector(
     {
         name,
-        value,
         setValue,
+        value,
         label,
     } : CharitySelectorProps
 ) {
-
-    const {
-        status,
-        runAsync,
-    } = useAsync(AsyncState.Available)
-
-    const [charities, setCharities] = useState<Charity[]>([])
-    const [search, setSearch] = useState<string>("")
-    const selectedIndex = charities.findIndex(c => c.Id == value)
-    const searchTimeout = useRef(null)
-
     const searchRef = useRef(null)
+    searchRef.current = ""
 
-    useEffect(()=>{
-        runAsync(loadCharities, {
-            AvailableMsg: '',
-            ThrowError: false,
-            AvailableAfterError: true
-        })
-
-        //TODO: we may want to change this to run each time
-        // on search, for example.
-    }, [])
-
-    // This initial load will show the featured ones
-    async function loadCharities() {
-        const charities = await CharityApi.search()
-        setValue(charities.Data[0].Id)
-        setCharities(charities.Data)
-    }
+    const debounceRef = useRef(null)
 
     async function searchCharities () {
-        const charities = await CharityApi.search(searchRef.current)
-        console.log('charities from search', charities.Data)
-        setCharities(charities.Data)
+        clearTimeout(debounceRef.current)
+        return new Promise(async (resolve) => {
+            debounceRef.current = setTimeout(async () => {
+                const charities = await CharityApi.search(searchRef.current)
+                const options = charities.Data.map((charity) => {
+                    return {
+                        ...charity,
+                        label: charity.Name,
+                        value: charity.Id
+                    }
+                })
+                resolve(options)
+            }, 250)
+        })
     }
 
-    let options = status == AsyncState.Available ? charities.map(c => ({
-        value: c.Id,
-        label: c.Name,
-    })) : []
-
-    function keyPress (e) {
-        if (e.nativeEvent.keyCode == 40) {
-            selectNext()
-        } else if (e.nativeEvent.keyCode == 38) {
-            selectPrevious()
-        }
+    const handleInputChange = (newValue : string) => {
+        searchRef.current = newValue
     }
 
-    function selectIndex (index) {
-        if (charities[index]) {
-            setValue(charities[index].Id)
-        }
+    const onChange = (e) => {
+        setValue(e)
     }
 
-    function clickOption (e, charity : Charity) {
-        setValue(charity.Id)
+    const components = {
+        Option: CharityOption
     }
-
-    function selectNext () {
-        let newIndex = selectedIndex + 1
-        selectIndex(newIndex)
-    }
-
-    function selectPrevious () {
-        let newIndex = selectedIndex - 1
-        if (newIndex < 0) {
-            setValue("")
-            console.log('focus on the search input')
-            return
-        }
-        selectIndex(newIndex)
-    }
-
-    function charityOption (charity : Charity) {
-        const selected = charity.Id == value
-        return <li key={charity.Id} className={cx("charity-option", (selected ? "selected" : ""))} onClick={(e) => clickOption(e, charity)}>
-            <div className={"name"}>{charity.Name}</div>
-            <div className={"description"}>{charity.Description}</div>
-        </li>
-    }
-
-    async function changeSearch (e) {
-        clearTimeout(searchTimeout.current)
-        setSearch(e.target.value)
-        searchRef.current = e.target.value
-
-        searchTimeout.current = setTimeout(async () => {
-            console.log('do the search async call')
-            runAsync(searchCharities, {
-                AvailableMsg: '',
-                ThrowError: true,
-                AvailableAfterError: true
-            })
-        }, 250)
-    }
-
 
     return <div className={"form-group charity-selector-container"}>
         <label htmlFor={name}>{label}</label>
 
-        <div className={"form-input"}>
-            <input type={"text"}
-                   value={search}
-                   placeholder={"Search charities"}
-                   onChange={changeSearch}
-                   onKeyDown={keyPress}
-
-            />
-            <ol className={"charity-options"}>
-                {!charities.length && <li className={"empty-message"}>Couldn't find anything</li>}
-                {charities.map(charityOption)}
-            </ol>
-        </div>
+        <AsyncSelect
+            instanceId={"charity-selector"}
+            loadOptions={searchCharities}
+            defaultOptions
+            value={value}
+            components={components}
+            onInputChange={handleInputChange}
+            onChange={onChange}
+        />
     </div>
 }

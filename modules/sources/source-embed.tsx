@@ -1,5 +1,5 @@
 import React from "react"
-import {Source} from "model/source"
+import {Source, Types} from "model/source"
 import RedditComment from "./reddit/reddit-comment"
 import RedditPost from "./reddit/reddit-post"
 import DefaultSource from "./default-source"
@@ -13,10 +13,10 @@ export default function SourceEmbed (props : SourceEmbedProps) {
     let inner;
     const {source} = props
     switch (source.Type) {
-        case "reddit_comment":
+        case Types.REDDIT_COMMENT:
             inner = <RedditComment {...props} />
             break;
-        case "reddit_post":
+        case Types.REDDIT_POST:
             inner = <RedditPost {...props} />
             break;
         default:
