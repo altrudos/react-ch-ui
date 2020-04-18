@@ -1,5 +1,6 @@
 import Api, {Paged} from "./api"
 import {Drive, NewDrive, DriveInfo} from "../model/drive"
+import {trimSourceUrl, Types} from "model/source"
 import {parseError} from "util/error";
 import {SubmittedDonation} from "model/donation";
 import {transformDonation} from "api/donations";
@@ -21,7 +22,7 @@ export enum DriveTopRange {
     Month
 }
 
-export function transformDrive (drive) : Drive {
+export function transformDrive (drive : Drive | any) : Drive {
     if (!drive.Source) {
         drive.Source = {
             Url: drive.SourceUrl,
@@ -31,6 +32,26 @@ export function transformDrive (drive) : Drive {
         }
     }
     return drive
+}
+
+export function getDriveTitle (drive : Drive) : string {
+    const meta = drive.Source.Meta
+    switch (drive.SourceType) {
+        case Types.REDDIT_COMMENT:
+            return `${meta['author']}'s comment - "${meta['title']}" - /r/${meta['subreddit']}`
+            break
+        case Types.REDDIT_COMMENT:
+            return `${meta['title']} - ${meta['author']} - /r/${meta['subreddit']}`
+            break
+        default:
+            const trimmed = trimSourceUrl(drive.SourceUrl)
+            // This is just a very simplistic check to see if this drive is for the domain
+            // or for a page on that domain
+            if (trimmed.split("/").length >= 2 || trimmed.indexOf("?") != -1) {
+                return `Page at ${trimmed}`
+            }
+            return `${trimmed}`
+    }
 }
 
 const DriveApi = {

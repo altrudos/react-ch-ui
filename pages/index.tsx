@@ -8,6 +8,8 @@ import DrivesList from "modules/drives/drives-list";
 import DonationsList from "modules/donations/donations-list";
 import HeroHeader from "components/hero-header"
 import "./css/index.less"
+import Head from 'next/head'
+
 
 export type HomePageInfo = {
     TopDrives: Drive[],
@@ -17,13 +19,24 @@ export type HomePageInfo = {
 export default function HomePage ({data}) {
     return (
     <div className="fullscreen">
+        <Head>
+            <title>Donate to charity to show you like something - Altrudos</title>
+            <meta
+                name="viewport"
+                content="initial-scale=1.0, width=device-width"
+                key="viewport"
+            />
+            <meta
+                name="descrkption"
+                content="Show your love for online content by giving money to charity. Give kudos to reddit comments, YouTube videos, tweets, Twitch clips, and more."
+                key="description"
+            />
+        </Head>
         <div className={"hero-header-container"}>
             <HeroHeader />
         </div>
-        <div className={"new-drive-container"}>
-            <div className={"container"}>
-                <NewDriveForm/>
-            </div>
+        <div className={"container new-drive-container"}>
+            <NewDriveForm/>
         </div>
         <div className={"container row"}>
             <div className={"col-md-6 col-sm-12"}>

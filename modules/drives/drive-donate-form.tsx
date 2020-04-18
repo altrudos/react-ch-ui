@@ -5,6 +5,7 @@ import Errors from "../../components/errors/errors"
 import {AsyncState} from "../../components/async"
 import getAmount from "util/amount"
 import {SubmittedDonation} from "model/donation";
+import {Charity} from "model/charity";
 import {Drive} from "model/drive";
 import DriveApi from "api/drives";
 import {parseError} from "util/error";
@@ -18,7 +19,7 @@ export default function NewDriveForm (
         drive : Drive
     }
 ) {
-    const [charityId, setCharity] = useState<string>("")
+    const [charity, setCharity] = useState<Charity>(null)
     const [amount, setAmount] = useState<string>("10")
     const [name, setName] = useState<string>("")
     const [currency, setCurrency] = useState<string>("USD")
@@ -42,7 +43,7 @@ export default function NewDriveForm (
         const dono : SubmittedDonation = {
             Amount: amtFixed,
             Currency: curr,
-            CharityId: charityId,
+            CharityId: charity.Id,
             DonorName: name,
         }
 
@@ -68,7 +69,7 @@ export default function NewDriveForm (
             setAmount={setAmount}
             name={name}
             setName={setName}
-            charity={charityId}
+            charity={charity}
             setCharity={setCharity} />
         <div className={"form-group"}>
             <StatusButton status={AsyncState.Available}>Continue to Payment</StatusButton>

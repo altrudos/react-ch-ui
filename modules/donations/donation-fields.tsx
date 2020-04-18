@@ -2,6 +2,18 @@ import React, {useState, Fragment} from 'react'
 import CharitySelector from "../charities/charity-selector"
 import Input from "../../components/form/input"
 import CurrencySelect from "../../components/form/currency-select"
+import {Charity} from "model/charity";
+
+export type DonationFieldsProps = {
+    charity? : Charity,
+    setCharity: (any) => any,
+    amount : string,
+    setAmount: (any) => any,
+    currency: string,
+    setCurrency: (any) => any,
+    name: string,
+    setName: (any) => any,
+}
 
 export default function DonationFields (
     {
@@ -13,7 +25,7 @@ export default function DonationFields (
         setCurrency,
         name,
         setName
-    }
+    } : DonationFieldsProps
 ) {
     return (
         <Fragment>
