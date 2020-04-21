@@ -18,7 +18,7 @@ export type HomePageInfo = {
 
 export default function HomePage ({data}) {
     return (
-    <div className="fullscreen">
+    <div className="">
         <Head>
             <title>Donate to charity to show you like something - Altrudos</title>
             <meta
@@ -35,13 +35,13 @@ export default function HomePage ({data}) {
 
         <section className="section">
             <div className={"container new-drive-container"}>
-                <div className="columns">
-                    <div className="column is-6 m-auto">
+                <div className="columns is-desktop">
+                    <div className="column is-half-desktop m-auto">
                         <div className={"hero-header-container"}>
                             <HeroHeader />
                         </div>
                     </div>
-                    <div className="column is-6">
+                    <div className="column is-half-desktop">
                         <NewDriveForm/>
                     </div>
                 </div>

@@ -83,7 +83,7 @@ export default function NewDriveForm () {
             setCharity={setCharity} />
         <div className={"columns"}>
             <div className={"column"}>
-                <StatusButton status={AsyncState.Available} className="button is-block is-warning is-medium is-fullwidth is-size-6">Continue to Payment</StatusButton>
+                <StatusButton status={AsyncState.Available} className="button is-block is-medium is-fullwidth is-size-6">Continue to Payment</StatusButton>
             </div>
         </div>
     </form>
