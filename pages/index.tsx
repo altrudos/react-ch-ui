@@ -36,13 +36,13 @@ export default function HomePage ({data}) {
         <section className="section">
             <div className={"container new-drive-container"}>
                 <div className="columns">
-                    <div className="column is-6">
-                        <NewDriveForm/>
-                    </div>
                     <div className="column is-6 m-auto">
                         <div className={"hero-header-container"}>
                             <HeroHeader />
                         </div>
+                    </div>
+                    <div className="column is-6">
+                        <NewDriveForm/>
                     </div>
                 </div>
             </div>
