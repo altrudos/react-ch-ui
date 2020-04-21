@@ -112,8 +112,8 @@ export default function CharitySelector(
         Option: CharityOption
     }
 
-    return <div className={"form-group charity-selector-container"}>
-        <label htmlFor={name}>{label}</label>
+    return <div className={"column charity-selector-container"}>
+        <label className="label" htmlFor={name}>{label}</label>
 
         <AsyncSelect
             instanceId={"charity-selector"}

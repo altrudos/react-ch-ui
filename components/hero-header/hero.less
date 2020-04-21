@@ -1,5 +1,11 @@
-.hero-header {
+@import "../base";
+
+.hero-head {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: bold;
+  // text-transform: uppercase;
   padding: 20px 0px;
+  font-size: 1.5rem;
 }
 
 .hero-row {
@@ -13,7 +19,7 @@
   margin-left: 5px;
   font-weight: bold;
   width: 6.5em;
-  background: #F6A7C1;
+  box-shadow: inset 0 -0.125em #ffc0cb;
   text-align: center;
 }
 
@@ -21,30 +27,31 @@
   margin-left: 5px;
   font-weight: bold;
   width: 8.9em;
-  background: #ccc;
   color: #000;
+  box-shadow: inset 0 -0.125em rgba(0, 209, 178, 0.502);
   text-align: center;
 }
 
+
 .hero-row.for-example {
   &.youtube .example {
-    background: #FF0000;
-    color: #fff;
+    box-shadow: inset 0 -0.125em #FF0000;
+    color: #FF0000;
   }
 
   &.reddit .example {
-    background: #cee2f8;
-    color: #060607;
+    box-shadow: inset 0 -0.125em #FF4301;
+    color: #FF4301;
   }
 
   &.twitter .example {
-    background: #1DA1F2;
-    color: #fff;
+    box-shadow: inset 0 -0.125em #1DA1F2;
+    color: #1DA1F2;
   }
 
   &.twitch .example {
-    background: #6441a5;
-    color: #fff;
+    box-shadow: inset 0 -0.125em #6441a5;
+    color: #6441a5;
   }
 
   &.instagram .example {
@@ -54,5 +61,6 @@
     background: linear-gradient(0deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
     color: #fff;
+    box-shadow: unset;
   }
 }

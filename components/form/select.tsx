@@ -28,16 +28,18 @@ export default function Select({
     setValue
 } : SelectProps) {
     return (
-        <div className={cx("form-group", className, {inline})}>
-            {!!label && (
-                <label htmlFor={name}>{label}</label>
-            )}
-            <div className="form-input">
-                <select
-                    value={value}
-                    onChange={ e => setValue(e.target.value) }>
-                    {options.map(o => <option value={o.value} key={o.value}>{o.label}</option>)}
-                </select>
+        <div className={cx("column", className, {inline})}>
+            <div className="field">
+                {!!label && (
+                    <label className="label">{label}</label>
+                )}
+                <div className="select">
+                    <select
+                        value={value}
+                        onChange={ e => setValue(e.target.value) }>
+                        {options.map(o => <option value={o.value} key={o.value}>{o.label}</option>)}
+                    </select>
+                </div>
             </div>
         </div>
     )

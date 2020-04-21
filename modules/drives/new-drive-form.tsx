@@ -67,9 +67,11 @@ export default function NewDriveForm () {
         return <DonationRedirect url={donateLink} />
     }
 
-    return <form onSubmit={submit}>
+    return <form onSubmit={submit} className={"box"}>
         <Errors errors={errors}></Errors>
-        <Input name={"sourceUrl"} value={sourceUrl} setValue={setSourceUrl} placeholder={"Paste link"} label={"Content you like"} />
+        <div className={"columns"}>
+            <Input name={"sourceUrl"} value={sourceUrl} setValue={setSourceUrl} placeholder={"Paste link"} label={"Content you like"} />
+        </div>
         <DonationFields
             name={name}
             setName={setName}
@@ -79,8 +81,10 @@ export default function NewDriveForm () {
             setAmount={setAmount}
             charity={charity}
             setCharity={setCharity} />
-        <div className={"form-group"}>
-            <StatusButton status={AsyncState.Available}>Continue to Payment</StatusButton>
+        <div className={"columns"}>
+            <div className={"column"}>
+                <StatusButton status={AsyncState.Available} className="button is-block is-warning is-medium is-fullwidth is-size-6">Continue to Payment</StatusButton>
+            </div>
         </div>
     </form>
 

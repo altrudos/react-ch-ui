@@ -29,10 +29,16 @@ export default function DonationFields (
 ) {
     return (
         <Fragment>
-            <CharitySelector value={charity} name={"charity_id"} setValue={setCharity} label={"Charity"}/>
-            <Input name="amount" value={amount} setValue={setAmount} label={"Amount"} />
-            <CurrencySelect name={"currency"} value={currency} setValue={setCurrency} label={"Currency"} />
-            <Input name="name" value={name} setValue={setName} label={"Your Name"} />
+            <div className="columns">
+                <CharitySelector value={charity} name={"charity_id"} setValue={setCharity} label={"Charity"}/>
+            </div>
+            <div className="columns">
+                <Input name="amount" value={amount} setValue={setAmount} label={"Amount"}/>
+                <CurrencySelect name={"currency"} value={currency} setValue={setCurrency} label={"Currency"} />
+            </div>
+            <div className="columns">
+                <Input name="name" value={name} setValue={setName} label={"Your Name"} />
+            </div>
 
         </Fragment>
     )
