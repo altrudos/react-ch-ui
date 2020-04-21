@@ -33,15 +33,16 @@ export default function Input(
 ) {
 
   return (
-    <div className={cx("form-group", className, {inline})}>
-      {!!label && (
-        <label htmlFor={name}>{label}</label>
-      )}
-      <div className="form-input">
+    <div className={cx("column", className, {inline})}>
+      <div className="field">
+        {!!label && (
+          <label className="label">{label}</label>
+        )}
         <input
           placeholder={ placeholder || name }
           type={type}
           value={value}
+          className={"input"}
           onChange={ e => setValue(e.target.value) }
         />
         {children}

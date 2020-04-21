@@ -150,17 +150,19 @@ export default function Hero () {
         }
     }, [])
 
-    return <div className={"hero-header"}>
-        <div className={"hero-row show-kudos"}>
-            <span className={"for"}>Show your</span>
-            <span className={"kudos"}>{kudos}</span>
+    return <section className={"hero-header hero is-medium"}>
+        <div className="hero-head">
+            <span className={"hero-row show-kudos"}>
+                <span className={"for"}>Show your</span>
+                <span className={"kudos"}>{kudos}</span>
+            </span>
+            <span className={"hero-row for-example " + example.className}>
+                <span className={"for"}>for</span>
+                <span className={"example"}>{example.text}</span>
+            </span>
+            <span className={"hero-row cta"}>
+                by donating to charity
+            </span>
         </div>
-        <div className={"hero-row for-example " + example.className}>
-            <span className={"for"}>for</span>
-            <span className={"example"}>{example.text}</span>
-        </div>
-        <div className={"hero-row cta"}>
-            by donating to charity
-        </div>
-    </div>
+    </section>
 }

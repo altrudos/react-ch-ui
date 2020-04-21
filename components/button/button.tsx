@@ -11,7 +11,7 @@ export default function Button(
 ){
   return (
     <button
-      className={cx("btn", className)}
+      className={cx("button is-primary", className)}
       {...rest}
     >
       {children}

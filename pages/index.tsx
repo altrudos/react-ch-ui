@@ -32,20 +32,32 @@ export default function HomePage ({data}) {
                 key="description"
             />
         </Head>
-        <div className={"hero-header-container"}>
-            <HeroHeader />
-        </div>
-        <div className={"container new-drive-container"}>
-            <NewDriveForm/>
-        </div>
-        <div className={"container row"}>
-            <div className={"col-md-6 col-sm-12"}>
-                <h6>Weekly Top Drives</h6>
-                <DrivesList drives={data.TopDrives}/>
+
+        <section className="section">
+            <div className={"container new-drive-container"}>
+                <div className="columns">
+                    <div className="column is-6">
+                        <NewDriveForm/>
+                    </div>
+                    <div className="column is-6 m-auto">
+                        <div className={"hero-header-container"}>
+                            <HeroHeader />
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div className={"col-md-6 col-sm-12"}>
-                <h6>Recent Donations</h6>
-                <DonationsList donations={data.RecentDonations} showDrive={true}/>
+        </section>
+
+        <div className={"container"}>
+            <div className="columns">
+                <div className={"column is-6"}>
+                    <h6>Weekly Top Drives</h6>
+                    <DrivesList drives={data.TopDrives}/>
+                </div>
+                <div className={"column is-6"}>
+                    <h6>Recent Donations</h6>
+                    <DonationsList donations={data.RecentDonations} showDrive={true}/>
+                </div>
             </div>
         </div>
     </div>
