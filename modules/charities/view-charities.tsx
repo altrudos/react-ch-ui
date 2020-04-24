@@ -26,7 +26,7 @@ export default function CharitiesView() {
   }, [])
 
   async function loadCharities() {
-    const charities = await CharityApi.all()
+    const charities = await CharityApi.search()
     setCharities(charities.Data)
   }
 
