@@ -2,7 +2,7 @@ import {Drive} from "model/drive";
 
 export type Donation = {
     Id: string
-    Created: Date,
+    CreatedAt: Date,
     CharityDescription: string,
     CharityId: string,
     CharityName: string,
