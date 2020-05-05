@@ -38,8 +38,8 @@ export function DonationListItem (donation : Donation, showDrive : boolean) {
             to
             <span className={"charity-name"} title={donation.CharityDescription}>{donation.CharityName}</span>
         </div>
-        <div className={"bottom-lin"}><ElapsedTime time={donation.CreatedAt} /> by {name}</div>
         {showDrive && driveLink}
+        <div className={"bottom-lin"}><ElapsedTime time={donation.CreatedAt} /> by {name}</div>
     </li>
 }
 

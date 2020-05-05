@@ -4,7 +4,7 @@ ul.drives-list {
   li {
     padding: 10px 0 0 0px;
     margin: 10px 0 0 0;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #f0f0f0;
 
     .drive-raised {
       font-weight: bold;
@@ -13,7 +13,7 @@ ul.drives-list {
     .drive-meta .since {
       margin: 0 5px;
     }
-
+    
     a {
       display: block;
       color: #333;
@@ -24,6 +24,28 @@ ul.drives-list {
       }
     }
 
+
+    .source-embed {
+      div {
+            font-weight: bold;
+            line-height: 2;
+            font-size: 0.9em;
+        a {
+          display: inline;
+          color: #01d1b2;
+          text-decoration: underline;
+
+          &:hover {
+            color: #000;
+          }
+        }
+      }
+    }
+
+    &:first-child {
+      margin-top: 0px;
+      border-top: 0px;
+    }
     &:last-child {
       margin-bottom: 0px;
       border-bottom: 0px;

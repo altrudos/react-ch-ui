@@ -97,12 +97,16 @@ export function _DrivePage(
         <div className={"container"}>
           <div className="columns is-desktop">
             <div className={"column is-half-desktop"}>
-              <h3>Top Donations</h3>
-              <DonationsList donations={data.TopDonations}/>
+              <div className="box">
+                <span className="box-badge">Top Donations</span>
+                <DonationsList donations={data.TopDonations}/>
+              </div>
             </div>
             <div className={"column is-half-desktop"}>
-              <h3>Recent Donations</h3>
-              <DonationsList donations={data.RecentDonations}/>
+              <div className="box">
+                <span className="box-badge">Recent Donations</span>
+                <DonationsList donations={data.RecentDonations}/>
+              </div>
             </div>
           </div>
         </div>

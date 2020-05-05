@@ -48,16 +48,20 @@ export default function HomePage ({data}) {
             </div>
         </section>
 
-        <section className={"section"}>
+        <section className={"section pt-0"}>
             <div className={"container"}>
                 <div className="columns is-desktop">
                     <div className={"column is-half-desktop"}>
-                        <h6>Weekly Top Drives</h6>
-                        <DrivesList drives={data.TopDrives}/>
+                        <div className="box">
+                            <span className="box-badge">Weekly Top Drives</span>
+                            <DrivesList drives={data.TopDrives}/>
+                        </div>
                     </div>
                     <div className={"column is-half-desktop"}>
-                        <h6>Recent Donations</h6>
-                        <DonationsList donations={data.RecentDonations} showDrive={true}/>
+                        <div className="box">
+                            <span className="box-badge">Recent Donations</span>
+                            <DonationsList donations={data.RecentDonations} showDrive={true}/>
+                        </div>
                     </div>
                 </div>
             </div>

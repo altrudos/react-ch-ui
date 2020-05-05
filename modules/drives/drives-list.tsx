@@ -36,7 +36,7 @@ export default function DrivesList(
 ) {
 
     return <ul className={"drives-list"}>
+        {!drives.length && <li className={"empty-message"}>No drives.</li>}
         {drives.length && drives.map(DriveListItem)}
-        {!drives.length && <li className={"empty-message"}>No drives</li>}
     </ul>
 }
