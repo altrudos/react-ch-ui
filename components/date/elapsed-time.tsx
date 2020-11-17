@@ -24,11 +24,15 @@ export default function ElapsedTime(
     }
   }, [])
 
-  const formatted = (seconds > 0 && seconds < 60 * 24 * 7)? formatSeconds(seconds) : date.toLocaleDateString('en', {
+  let formatted = (seconds > 0 && seconds < 60 * 24 * 7) ? formatSeconds(seconds) : date.toLocaleDateString('en', {
     month: 'short',
     day: 'numeric',
     year: 'numeric'
   })
+
+  if (seconds < 60) {
+    formatted = 'just now'
+  }
 
   return (
     <span title={ date.toISOString() }>{ formatted }</span>

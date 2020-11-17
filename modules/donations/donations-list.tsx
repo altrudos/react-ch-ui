@@ -5,9 +5,12 @@ import Link from "next/link"
 import "./donations-list.less"
 import ElapsedTime from "components/date/elapsed-time";
 import SourceEmbed from "modules/sources/source-embed";
+import DriveLink from "modules/drives/drive-link";
+import {Drive} from "../../model/drive";
 
 export type DonationsListProps = {
     donations: Donation[]
+    drive?: Drive
     showDrive?: boolean
 }
 
@@ -15,39 +18,34 @@ export function DonationListItem (donation : Donation, showDrive : boolean) {
     let driveLink = null
     if (showDrive) {
         const drive = donation.Drive
-
-        let driveInner = <span>{donation.Drive.Uri}</span>
-
-        if (donation.Drive.Source) {
-            driveInner = <SourceEmbed source={drive.Source} link={false} />
-        }
-
-        driveLink = <Link href="/d/[uri]" as={`/d/${drive.Uri}`}>
-            <a href={"/d/" + drive.Uri}>
-                {driveInner}
-            </a>
-        </Link>
+        driveLink = DriveLink(drive)
     }
     let name = <span className={"donor-name anonymous"}>Anon</span>
     if (donation.DonorName) {
         name = <span className={"donor-name"}>{donation.DonorName}</span>
     }
+
+    const moneyLink = DriveLink(donation.Drive, <React.Fragment><Money amount={donation.DonorAmount} currency={donation.DonorCurrency}  title={donation.FinalAmount + ' ' + donation.FinalCurrency}/>
+        to
+        <span className={"charity-name"} title={donation.CharityDescription}>{donation.CharityName}</span></React.Fragment>)
     return <li key={donation.Id}>
         <div className={"top-link"}>
-            <Money amount={donation.DonorAmount} currency={donation.DonorCurrency}  title={donation.FinalAmount + ' ' + donation.FinalCurrency}/>
-            to
-            <span className={"charity-name"} title={donation.CharityDescription}>{donation.CharityName}</span>
+            {moneyLink}
         </div>
-        <div className={"bottom-lin"}><ElapsedTime time={donation.CreatedAt} /> by {name}</div>
         {showDrive && driveLink}
+        <div className={"bottom-line"}><ElapsedTime time={donation.CreatedAt} /> by {name}</div>
     </li>
 }
 
 export default function DonationsList ({
     donations,
-    showDrive
+    showDrive,
+    drive
 } : DonationsListProps) {
     const children = donations.map((donation) => {
+        if (drive && !donation.Drive) {
+            donation.Drive = drive
+        }
         return DonationListItem(donation, showDrive)
     })
     return <ul className={"donations-list"}>

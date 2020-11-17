@@ -4,6 +4,8 @@ import RedditComment from "./reddit/reddit-comment"
 import RedditPost from "./reddit/reddit-post"
 import DefaultSource from "./default-source"
 
+import './source-embed.less'
+
 export type SourceEmbedProps = {
     source : Source,
     link?: boolean // If false, don't add hyperlinks to the embed

@@ -7,9 +7,9 @@ export default function DefaultSourceEmbed ({
 } : SourceEmbedProps )
 {
     let inner = trimSourceUrl(source.Url)
-    return <div className={"reddit reddit-comment"}>
+    return <div className={"default-source"}>
         <div className={"label"}>Whatever is at</div>
-        {link && <a href={source.Url} title={source.Url}>{inner}</a>}
-        {!link && <span>{inner}</span>}
+        {link && <a href={source.Url} title={source.Url} className={"url"}>{inner}</a>}
+        {!link && <span className={"url"}>{inner}</span>}
     </div>
 }

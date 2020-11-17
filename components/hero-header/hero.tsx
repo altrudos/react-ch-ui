@@ -70,7 +70,7 @@ const kudoses = [
     'gratitude',
     'admiration',
     'affection',
-    'respect'
+    'respect',
 ];
 
 export default function Hero () {

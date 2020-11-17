@@ -98,11 +98,11 @@ export function _DrivePage(
           <div className="columns is-desktop">
             <div className={"column is-half-desktop"}>
               <h3>Top Donations</h3>
-              <DonationsList donations={data.TopDonations}/>
+              <DonationsList donations={data.TopDonations} drive={data.Drive} />
             </div>
             <div className={"column is-half-desktop"}>
               <h3>Recent Donations</h3>
-              <DonationsList donations={data.RecentDonations}/>
+              <DonationsList donations={data.RecentDonations} drive={data.Drive} />
             </div>
           </div>
         </div>
