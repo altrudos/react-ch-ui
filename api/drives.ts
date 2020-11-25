@@ -15,7 +15,6 @@ export type NewDonationResponse = {
     DonateLink: string
 }
 
-
 export enum DriveTopRange {
     Week,
     Day,
@@ -26,7 +25,7 @@ export function transformDrive (drive : Drive | any) : Drive {
     if (!drive.Source) {
         drive.Source = {
             Url: drive.SourceUrl,
-            Meta: drive.SourceMeta,
+            Meta: transformMeta(drive.SourceMeta),
             Key: drive.SourceKey,
             Type: drive.SourceType
         }
@@ -35,7 +34,7 @@ export function transformDrive (drive : Drive | any) : Drive {
 }
 
 export function getDriveTitle (drive : Drive) : string {
-    const meta = drive.Source.Meta
+    const meta = transformMeta(drive.Source.Meta)
     switch (drive.SourceType) {
         case Types.REDDIT_COMMENT:
             return `${meta['author']}'s comment - "${meta['title']}" - /r/${meta['subreddit']}`
@@ -52,6 +51,15 @@ export function getDriveTitle (drive : Drive) : string {
             }
             return `${trimmed}`
     }
+}
+
+// Some of the server data is inconsistent
+export function transformMeta (meta : any) : object {
+    const m = {}
+    Object.keys(meta).forEach((key) => {
+        m[key.toLowerCase()] = meta[key]
+    })
+    return m
 }
 
 const DriveApi = {
