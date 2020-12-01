@@ -4,3 +4,4 @@ modules/.DS_store
 *.iml
 node_modules
 package-lock.json
+deploy.sh
