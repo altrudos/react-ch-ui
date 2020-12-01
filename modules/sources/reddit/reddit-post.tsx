@@ -12,11 +12,11 @@ export default function RedditCommentEmbed ({
     const meta = source.Meta
 
     let inner = <Fragment>
-      <a href={source.Url}>{meta['title']}'s post</a> in <a href={"https://www.reddit.com/r/" + meta['subreddit']}>/r/{meta['subreddit']}</a>
+      <a href={source.Url}>{meta['author']}'s post</a> in <a href={"https://www.reddit.com/r/" + meta['subreddit']}>/r/{meta['subreddit']}</a>
     </Fragment>
 
     if (!link) {
-      inner = <Fragment>{meta['title']}'s post in /r/{meta['subreddit']}</Fragment>
+      inner = <Fragment>{meta['author']}'s post in /r/{meta['subreddit']}</Fragment>
     }
 
     return <div className={"reddit reddit-post"}>

@@ -87,7 +87,7 @@ export function _DrivePage(
               <div className={"inner"}>
                 <SourceEmbed source={drive.Source} link={true}/>
                 <div className={"amount-raised"}><Money amount={drive.USDAmountTotal} currency={"USD"}/> raised</div>
-                <div className={"meta"}>{drive.NumDonations || 0} donations since <ElapsedTime time={drive.CreatedAt} /></div>
+                <div className={"meta"}>{drive.NumDonations || 0} donation{drive.NumDonations == 1 ? '': 's'} since <ElapsedTime time={drive.CreatedAt} /></div>
               </div>
             </div>
           </div>

@@ -137,5 +137,7 @@ export default function CharitySelector(
             onChange={onChange}
             style={styles}
         />
+
+        <div className={"help-text"}>From <a href={"https://justgiving.org"}>justgiving.org</a></div>
     </div>
 }
