@@ -1,4 +1,25 @@
 .charity-selector-option {
+	border-left: 2px solid transparent;
+
+	&.featured {
+      border-left-color: dodgerblue;
+	}
+
+  &.has-image {
+    display: flex;
+    flex-direction: row;
+
+    .charity-image-container {
+      width: 80px;
+      margin-right: 5px;
+      font-size: 8px;
+      flex: 0 0 auto;
+      img {
+        width: 80px;
+      }
+    }
+  }
+
   .charity-name {
     font-weight: bold;
     font-size: 12px;
@@ -18,17 +39,8 @@
     font-style: italic;
   }
 
-  &.has-image {
-    display: flex;
-    flex-direction: row;
+}
 
-    .charity-image-container {
-      width: 80px;
-      margin-right: 5px;
-      font-size: 8px;
-      img {
-        width: 80px;
-      }
-    }
-  }
+.charity-selector__menu {
+  z-index: 10 !important;
 }

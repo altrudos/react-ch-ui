@@ -2,7 +2,7 @@ import React, {Fragment, useRef} from 'react'
 import {Charity} from "model/charity";
 import CharityApi from "api/charities";
 import cx from "../../util/cx"
-import AsyncSelect, {Option} from 'react-select/async'
+import AsyncSelect from 'react-select/async'
 import "./charity-selector.less"
 import { css } from "emotion"
 
@@ -59,7 +59,8 @@ function CharityOption (props) {
                     'option--is-disabled': isDisabled,
                     'option--is-focused': isFocused,
                     'option--is-selected': isSelected,
-                    'has-image': data.LogoUrl
+                    'has-image': data.LogoUrl,
+                    'featured': data.FeatureScore > 0
                 },
                 'global-search-option'
             )}
@@ -112,17 +113,29 @@ export default function CharitySelector(
         Option: CharityOption
     }
 
+    const styles = {
+        menu: (provided) => {
+            return {
+                ...provided,
+                zIndex: 10,
+                borderBottom: '1px solid pink'
+            }
+        }
+    }
+
     return <div className={"column charity-selector-container"}>
         <label className="label" htmlFor={name}>{label}</label>
 
         <AsyncSelect
             instanceId={"charity-selector"}
+            classNamePrefix={"charity-selector"}
             loadOptions={searchCharities}
             defaultOptions
             value={value}
             components={components}
             onInputChange={handleInputChange}
             onChange={onChange}
+            style={styles}
         />
     </div>
 }
