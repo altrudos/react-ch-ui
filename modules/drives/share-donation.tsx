@@ -5,9 +5,7 @@ import './share-donation.less'
 import {MoneyToString} from "../../components/money";
 
 export function ShareDonation(donation : Donation, drive: Drive) {
-	let msg = `I donated ${MoneyToString(donation.DonorAmount, donation.DonorCurrency)} for ${getDriveTitle(drive)} `
-
-	msg += ` ${window.location}`
+	let msg = `I donated ${MoneyToString(donation.DonorAmount, donation.DonorCurrency)} to ${donation.CharityName} for ${getDriveTitle(drive)} ${window.location}`
 
 	function copy (e) {
 		e.preventDefault()
