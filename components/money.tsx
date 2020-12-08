@@ -20,11 +20,7 @@ const suffixes = {
     aud: ' AUD'
 }
 
-export default function Money ({
-    amount,
-    currency,
-    title
-} : MoneyProps) {
+export function MoneyToString (amount, currency) : string {
     let prefix = ''
     if (prefixes[currency.toLowerCase()]) {
         prefix = prefixes[currency.toLowerCase()]
@@ -38,7 +34,17 @@ export default function Money ({
         prefix = '$'
         suffix = ''
     }
+    return `${prefix}${(amount/100).toFixed(2)}${suffix}`
+}
+
+export default function Money ({
+    amount,
+    currency,
+    title
+} : MoneyProps) {
+
+    const str = MoneyToString(amount, currency);
     return <span className={"money " + currency} title={title}>
-        <span className={"amount"}>{prefix}{(amount/100).toFixed(2)}{suffix}</span>
+        <span className={"amount"}>{str}</span>
     </span>
 }

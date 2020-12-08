@@ -11,6 +11,11 @@ import Money from "components/money";
 import "./css/drive.less"
 import ElapsedTime from "components/date/elapsed-time";
 import Head from "node_modules/next/dist/next-server/lib/head";
+import {Donation} from "model/donation";
+import {ShareDonation} from "modules/drives/share-donation";
+import {useRouter} from "next/router";
+import {getCookie, setCookie} from "../util/cookies";
+import DonationApi from "../api/donations";
 
 export type DrivePageProps = {
   data: DriveInfo,
@@ -40,10 +45,41 @@ export function _DrivePage(
     }
 ) {
   const [data, setData] = useState<DriveInfo>(initialData)
+  const [visitorDonation, setVisitorDonation] = useState<Donation>(null)
+
+  const router = useRouter()
 
   useEffect(() => {
     const it = setInterval(_update, 5000)
     return () => clearInterval(it)
+  }, [])
+
+  // On page load we check for a donation reference code in the URL
+  // This is put there by the server when it redirects them to this page
+  // after a successful donation
+  // We will also store it in a cookie in case they come back to the page
+  useEffect(() => {
+    const cookieKey = `don_${router.query.uri}`
+
+    if (router.query.donation) {
+      setCookie(cookieKey, router.query.donation)
+      router.push({
+        pathname: '/d/[uri]',
+        query: {
+          uri: data.Drive.Uri
+        }
+      }, undefined, {shallow: true})
+      return
+    }
+
+    const ref = getCookie(cookieKey)
+    if (ref) {
+      DonationApi.getByRef(ref).then((donation) => {
+        if (donation.Drive.Uri === router.query.uri) {
+          setVisitorDonation(donation)
+        }
+      })
+    }
   }, [])
 
   function _update () {
@@ -75,6 +111,11 @@ export function _DrivePage(
           <a>← Back home</a>
         </Link>
       </div>
+      {visitorDonation && <section className={"section share-section"}>
+        <div className={"container"}>
+          {ShareDonation(visitorDonation, drive)}
+        </div>
+      </section>}
       <section className="section">
         <div className={"container"}>
           <div className={"columns is-desktop"}>
