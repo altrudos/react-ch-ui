@@ -37,7 +37,7 @@ export function getDriveTitle (drive : Drive) : string {
     const meta = transformMeta(drive.Source.Meta)
     switch (drive.SourceType) {
         case Types.REDDIT_COMMENT:
-            return `${meta['author']}'s comment - "${meta['title']}" - /r/${meta['subreddit']}`
+            return `${meta['author']}'s comment in /r/${meta['subreddit']}`
             break
         case Types.REDDIT_COMMENT:
             return `${meta['title']} - ${meta['author']} - /r/${meta['subreddit']}`
