@@ -65,10 +65,7 @@ export function _DrivePage(
       setCookie(cookieKey, router.query.donation)
       router.push({
         pathname: '/d/[uri]',
-        query: {
-          uri: data.Drive.Uri
-        }
-      }, undefined, {shallow: true})
+      }, `/d/${router.query.uri}`, {shallow: true})
       return
     }
 
