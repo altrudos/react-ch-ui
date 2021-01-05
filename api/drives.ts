@@ -21,6 +21,17 @@ export enum DriveTopRange {
     Month
 }
 
+
+// Some of the server data is inconsistent
+export function transformMeta (meta : any) : object {
+    const m = {}
+    Object.keys(meta).forEach((key) => {
+        m[key.toLowerCase()] = meta[key]
+    })
+    return m
+}
+
+
 export function transformDrive (drive : Drive | any) : Drive {
     if (!drive.Source) {
         drive.Source = {
@@ -33,13 +44,25 @@ export function transformDrive (drive : Drive | any) : Drive {
     return drive
 }
 
+// Some things we want the title to be different for the <title> than from the title
+// we use for the textarea that they can copy their message from
+export function getDriveShareTitle (drive: Drive) {
+    const meta = transformMeta(drive.Source.Meta)
+    switch (drive.SourceType) {
+        case Types.REDDIT_POST:
+            return `${meta['author']}'s post in /r/${meta['subreddit']}`
+         default:
+            return getDriveTitle(drive)
+    }
+}
+
 export function getDriveTitle (drive : Drive) : string {
     const meta = transformMeta(drive.Source.Meta)
     switch (drive.SourceType) {
         case Types.REDDIT_COMMENT:
             return `${meta['author']}'s comment in /r/${meta['subreddit']}`
             break
-        case Types.REDDIT_COMMENT:
+        case Types.REDDIT_POST:
             return `${meta['title']} - ${meta['author']} - /r/${meta['subreddit']}`
             break
         default:
@@ -51,15 +74,6 @@ export function getDriveTitle (drive : Drive) : string {
             }
             return `${trimmed}`
     }
-}
-
-// Some of the server data is inconsistent
-export function transformMeta (meta : any) : object {
-    const m = {}
-    Object.keys(meta).forEach((key) => {
-        m[key.toLowerCase()] = meta[key]
-    })
-    return m
 }
 
 const DriveApi = {
