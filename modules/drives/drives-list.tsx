@@ -34,7 +34,6 @@ export default function DrivesList(
         drives
     } : DrivesListProps
 ) {
-    drives = []
     return <ul className={"drives-list"}>
         {drives.length > 0 ? drives.map(DriveListItem) : <React.Fragment />}
         {!drives.length && <li className={"empty-message"}>No drives to show. Get on it!</li>}
