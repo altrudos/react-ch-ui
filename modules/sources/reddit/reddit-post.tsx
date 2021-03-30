@@ -1,5 +1,6 @@
 import {Source} from "model/source";
 import {Fragment} from "react"
+import SourceIcon from "../source-icon";
 
 export default function RedditCommentEmbed ({
   source,
@@ -20,6 +21,6 @@ export default function RedditCommentEmbed ({
     }
 
     return <div className={"reddit reddit-post"}>
-      {inner}
+      {SourceIcon(source)} {inner}
     </div>
 }

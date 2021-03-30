@@ -1,10 +1,8 @@
 import React from "react"
 import {Donation} from "model/donation";
 import Money from "components/money"
-import Link from "next/link"
 import "./donations-list.less"
 import ElapsedTime from "components/date/elapsed-time";
-import SourceEmbed from "modules/sources/source-embed";
 import DriveLink from "modules/drives/drive-link";
 import {Drive} from "../../model/drive";
 

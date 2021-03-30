@@ -1,5 +1,6 @@
 import {Source} from "model/source";
 import {SourceEmbedProps} from "modules/sources/source-embed";
+import SourceIcon from "../source-icon";
 
 export default function RedditCommentEmbed ({
     source,
@@ -15,6 +16,6 @@ export default function RedditCommentEmbed ({
     }
 
     return <div className={"reddit reddit-comment"}>
-        {inner}
+        {SourceIcon(source)} {inner}
     </div>
 }

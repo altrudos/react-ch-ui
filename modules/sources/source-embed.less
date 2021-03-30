@@ -6,11 +6,21 @@
 	}
 
 	.url {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: flex;
 
-    :before {
-    }
+		img.source-icon {
+			margin-right: 2px;
+		}
+
+		:before {
+		}
+	}
+
+	img.source-icon {
+		height: 1.2em;
+		bottom: -3px;
+		position: relative;
 	}
 }

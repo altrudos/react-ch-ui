@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node server.js",
+    "dev": "env BASEURL=http://localhost:8989 node server.js",
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
     "start-win": "node server.js"
